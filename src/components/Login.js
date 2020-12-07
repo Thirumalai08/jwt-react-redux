@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 //import { useHistory } from 'react-router-dom'
 import {signin} from '../actions/userActions'
 
@@ -10,12 +10,20 @@ function Login(props){
         email:'',
         password:''
     })
+    const userSignin = useSelector((state)=>state.userSignin)
+    const {userInfo} = userSignin
     // from redux store
     const handleSubmit = (event) => {
         event.preventDefault()
         //dispatch
         dispatch(signin(data.email,data.password))
+        //props.history.push('/')
     }
+    useEffect(()=>{
+        if(userInfo) {
+            props.history.push('/')
+        }
+    },[props.history,userInfo])
     return(
         <div>
             <h1>Login</h1>

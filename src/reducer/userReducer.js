@@ -1,4 +1,4 @@
-const { SIGNIN_REQUEST, SIGNIN_SUCCESS, SIGNIN_ERROR, SIGNOUT } = require("../actions/userTypes");
+const { SIGNIN_REQUEST, SIGNIN_SUCCESS, SIGNIN_ERROR, SIGNOUT, AUTH_USER } = require("../actions/userTypes");
 
 function signinReducer(state={},action) {
     switch(action.type){
@@ -8,6 +8,8 @@ function signinReducer(state={},action) {
             return{loading:false,userInfo: action.payload}
         case SIGNIN_ERROR:
             return{loading:false,error: action.payload}
+        case AUTH_USER:
+            return {...state,userData:action.payload}
         case SIGNOUT:
             return {}
         default:
